@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(90deg, #c7c5f4, #776bcc);
+    color: #212121;
+}
+
+.alert {
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #000, -1px -1px 5px #000;
+    width: 50%;
+    display: none;
+    left: 25%;
+    padding: 120px;
+    text-align: center;
+}
+
+.alert button {
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background-color: #212121;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.place {
+    background-color: #fff;
+    margin: 10px auto;
+    width: 50%;
+    padding: 15px;
+}
+
+.add {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.add input {
+    padding: 5px 0px;
+    -webkit-appearance: none;
+    border: none;
+    border-bottom: 1px solid rgba(33, 33, 33, 0.38);
+    outline: none;
+    width: 50%;
+    transition: all .3s ease-in-out;
+}
+
+.add input:focus {
+    border: none;
+    border-bottom: 1px solid #212121;
+}
+
+.add button {
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background-color: #212121;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.items span {
+    font-size: 16px;
+    background-color: #212121;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.items i {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.save {
+    margin-left: 45%;
+    cursor: pointer;
+}
+
+.send-papers {
+    text-align: center;
+}

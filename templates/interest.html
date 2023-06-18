@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/interest.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="font-family:tahoma">
+    <div class="alert">
+        <h2></h2>
+        <button>ok</button>
+    </div>
+    <div class="place">
+        <h2 style="text-align:center">Manage Your Interests</h2>
+        <div class="add">
+            <input type="text" placeholder="add your skills" id="input-add">
+            <button id="add">ADD</button>
+        </div>
+        <div class="items">
+        </div>
+        <button class="save btn btn-primary" onclick="saveData()">Save</button>
+        <!-- <div>{{interestsD}}</div> -->
+    </div>
+    <div class="send-papers">
+        <h3>Get your papers based on your interests</h3>
+        <button class="btn btn-primary" onclick="sendPapers()"> Get Papers </button>
+        <div id="msg" style="display: none;">Wait your request is processing....</div>
+    </div>
+
+</body>
+<script>
+    var interests = JSON.parse('{{ interestsD | tojson }}')
+    console.log(interests)
+    function saveData() {
+        console.log(interests)
+        fetch('/interests', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: interests, send: false })
+        })
+            .then(response => response.text())
+            .then(result => {
+                alert("Your Interests has been updated")
+                // console.log(result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    function sendPapers() {
+        const msgelement = document.getElementById('msg')
+        msgelement.style.display = 'block';
+        fetch('sendpapers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: interests, send: true })
+        })
+            .then(response => response.text())
+            .then(result => {
+                msgelement.style.display = 'none';
+                alert(result)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    document.querySelector('#add').onclick = function () {
+        'use strict';
+        if (document.querySelector('#input-add').value === '') {
+            document.querySelector('.alert').style.display = "block";
+            document.querySelector('.alert h2').textContent = "fill the field please";
+            document.querySelector('.alert button').onclick = function () {
+                document.querySelector('.alert').style.display = "none";
+            };
+        } else {
+            var span = document.createElement('span'),
+                times = document.createElement('i');
+            times.setAttribute('class', 'fas fa-times');
+            span.textContent = document.querySelector('#input-add').value;
+            span.appendChild(times);
+            document.querySelector('.items').appendChild(span);
+            interests.push(span.textContent);
+            console.log(interests)
+            document.querySelector('#input-add').value = "";
+            times.onclick = function () {
+                this.parentElement.style.display = "none";
+                const inte = this.parentElement.innerText;
+                interests = interests.filter(interest => interest != inte);
+            };
+        }
+
+    };
+    interests.forEach(intr => {
+        var span = document.createElement('span'),
+            times = document.createElement('i');
+        times.setAttribute('class', 'fas fa-times');
+        span.textContent = intr;
+        span.appendChild(times);
+        document.querySelector('.items').appendChild(span);
+        times.onclick = function () {
+            this.parentElement.style.display = "none";
+            const inte = this.parentElement.innerText;
+            interests = interests.filter(interest => interest != inte);
+        };
+    });
+</script>
+
+</html>
