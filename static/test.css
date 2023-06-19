@@ -9,6 +9,7 @@
 
 body {
     background: linear-gradient(90deg, #c7c5f4, #776bcc);
+    overflow:hidden;
 }
 
 .container {
@@ -29,7 +30,7 @@ body {
 .screen__content {
     z-index: 1;
     position: relative;
-    height: 100%;
+    height: 600px;
 }
 
 .screen__background {
@@ -93,6 +94,19 @@ body {
 .login__field {
     padding: 20px 0px;
     position: relative;
+}
+.error
+{
+    color:red;
+    font-style: italic;
+}
+.login_a
+{
+    padding: 20px 0px;
+    position: relative;
+    font-size: large;
+    font-style: italic;
+    font-weight: 600;
 }
 
 .login__icon {
