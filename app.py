@@ -21,8 +21,8 @@ db = firestore.client()
 interests_db = db.collection('interests')
 users = db.collection("users")
 
-sender_email = 'vaisht1411@gmail.com'
-sender_password = 'gynxewqukdrsvlpc'
+sender_email = 'Sender Email'
+sender_password = 'Password'
 # Function to send an email
 
 scheduler = BackgroundScheduler()
@@ -257,24 +257,4 @@ scheduler.start()
 # jobd.remove()
 if __name__ == "__main__":
     app.run(debug=True)
-# Example usage
-# sender_email = 'vaisht1411@gmail.com'
-# sender_password = 'gynxewqukdrsvlpc'
-# receiver_email = 'vaishnavi.thakur2000@gmail.com'
-# subject = 'Recommended Research Papers'
-# interests = ['machinelearning', 'datascience']
 
-# Fetch research papers based on user's interests
-# papers = fetch_research_papers(interests)
-
-# Prepare the email message
-# message = f"Dear User,\n\nHere are some recommended research papers based on your interests:\n\n"
-# for paper in papers:
-#     message += f"Title: {paper['title']}\n"
-#     message += f"Authors: {paper['authors']}\n"
-#     message += f"PDF Link: {paper['abstract']}\n"
-#     message += f"Website: {paper['website']}\n\n"
-
-# # Send the email
-# send_email(sender_email, sender_password, receiver_email, subject, message)
-# print(sender_email, sender_password, receiver_email, subject, message)
